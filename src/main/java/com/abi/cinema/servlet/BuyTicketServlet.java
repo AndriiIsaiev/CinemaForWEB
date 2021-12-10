@@ -44,5 +44,7 @@ public class BuyTicketServlet extends HttpServlet {
         req.setAttribute("position", position);
         req.setAttribute("totalTotalCost", totalTotalCost);
         req.getRequestDispatcher("formconfirmbuy.jsp").forward(req, resp);
+
+        UtilsForServlets.listSeance(req, resp);
     }
 }
