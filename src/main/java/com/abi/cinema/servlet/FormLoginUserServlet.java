@@ -18,8 +18,8 @@ public class FormLoginUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("formLoginUserServlet#doGet");
 
-                String textError = "";
-                req.setAttribute("textError", "");
-                req.getRequestDispatcher("formloginuser.jsp").forward(req, resp);
+        String textError = "";
+        req.setAttribute("textError", "");
+        req.getRequestDispatcher("formloginuser.jsp").forward(req, resp);
     }
 }

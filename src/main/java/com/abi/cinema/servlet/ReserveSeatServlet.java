@@ -56,10 +56,11 @@ public class ReserveSeatServlet extends HttpServlet {
                                             seat.getId(),
                                              new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
                                             0);
+            String buyError = "";
             if (! ReservePool.addToReservePool(removeAddTicket)) {
-                String buyError = "This seat has already been reserved";
-                session.setAttribute("buyError", buyError);
+                buyError = "This seat has already been reserved";
             }
+            session.setAttribute("buyError", buyError);
         }
         System.out.println("size " + ReservePool.reservePool.size());
         System.out.println("Pool " + ReservePool.reservePool);

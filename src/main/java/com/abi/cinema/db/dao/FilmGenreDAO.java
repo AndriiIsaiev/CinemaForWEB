@@ -4,18 +4,19 @@ import com.abi.cinema.db.entity.Genre;
 import com.abi.cinema.db.relation.FilmGenre;
 import com.abi.cinema.db.relation.Relation;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FilmGenreDAO {
 
-    public static void insertFilmGenre(FilmGenre filmGenre) {
+    public static void insertFilmGenre(FilmGenre filmGenre) throws IOException {
         if (getFilmGenreByRelation(filmGenre).size() == 0) {
             UniversalDAO.insertRelation("film_genre", filmGenre);
         }
     }
 
-    public static List<FilmGenre> getFilmGenreByRelation(FilmGenre filmGenre) {
+    public static List<FilmGenre> getFilmGenreByRelation(FilmGenre filmGenre) throws IOException {
         List<Item> filter = new ArrayList<>();
         filter.add(new Item("","filmId", "=", filmGenre.getFilmId()));
         filter.add(new Item("AND","genreId", "=", filmGenre.getGenreId()));
@@ -23,7 +24,7 @@ public class FilmGenreDAO {
         return listFilmGenre;
     }
 
-    public static List<FilmGenre> getFilmGenreByFilter(List<Item> filter) {
+    public static List<FilmGenre> getFilmGenreByFilter(List<Item> filter) throws IOException {
         List<Relation> listRelation = UniversalDAO.getRelationByFilter("film_genre", filter, new FilmGenre());
         ArrayList<FilmGenre> listFilmGenre = new ArrayList<>();
         for (Object ob : listRelation) {
@@ -32,7 +33,7 @@ public class FilmGenreDAO {
         return listFilmGenre;
     }
 
-    public static List<Genre> getFilmGenreByFilmId(Integer filmId) {
+    public static List<Genre> getFilmGenreByFilmId(Integer filmId) throws IOException {
         List<Item> filter = new ArrayList<>();
         filter.add(new Item("","filmId", "=", filmId));
         List<Relation> listRelation = UniversalDAO.getRelationByFilter("film_genre", filter, new FilmGenre());

@@ -26,7 +26,5 @@ public class FormInsertUserServlet extends HttpServlet {
         req.setAttribute("password1", insertUser.getPassword());
         req.setAttribute("textError", "");
         req.getRequestDispatcher("forminsertuser.jsp").forward(req, resp);
-
-        UtilsForServlets.listUser(req, resp);
     }
 }

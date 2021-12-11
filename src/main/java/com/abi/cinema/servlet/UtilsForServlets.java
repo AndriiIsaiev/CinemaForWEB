@@ -215,7 +215,7 @@ public class UtilsForServlets {
         req.getRequestDispatcher("listseance.jsp").forward(req, resp);
     }
 
-    public static void fillFreeHall(HttpServletRequest req) {
+    public static void fillFreeHall(HttpServletRequest req) throws IOException {
         System.out.println("fillFreeHall");
 
         HttpSession session = req.getSession();
@@ -249,7 +249,7 @@ public class UtilsForServlets {
         session.setAttribute("hallId", hallId);
     }
 
-    public static void fillSeatInHall(HttpServletRequest req) {
+    public static void fillSeatInHall(HttpServletRequest req) throws IOException {
         System.out.println("fillSeatInHall");
 
         fillFreeHall(req);

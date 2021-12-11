@@ -24,7 +24,8 @@ public class FormInsertFilmServlet extends HttpServlet {
             Film insertFilm = new Film("");
             req.setAttribute("insertFilm", insertFilm);
             req.getRequestDispatcher("forminsertfilm.jsp").forward(req, resp);
+        } else {
+            UtilsForServlets.listFilm(req, resp);
         }
-        UtilsForServlets.listGenre(req, resp);
     }
 }

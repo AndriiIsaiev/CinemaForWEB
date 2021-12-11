@@ -1,6 +1,8 @@
 package com.abi.cinema.db.dao;
 
-public interface EntityDAO {
+import java.io.Serializable;
+
+public interface EntityDAO extends Serializable {
 
     static void buildFindKit(Object entity) {
     }
