@@ -22,7 +22,5 @@ public class FormRegisterUserServlet extends HttpServlet {
         req.setAttribute("password1", registerUser.getPassword());
         req.setAttribute("textError", "");
         req.getRequestDispatcher("formregisteruser.jsp").forward(req, resp);
-
-        UtilsForServlets.listUser(req, resp);
     }
 }

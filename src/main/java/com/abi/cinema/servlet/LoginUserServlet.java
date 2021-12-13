@@ -22,25 +22,23 @@ public class LoginUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("loginUserServlet#doPost");
 
+        HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
         User loginUser = new User(  req.getParameter("login"),
                                     req.getParameter("password"));
 
         String textError = UtilsForServlets.validLoginUser(loginUser, req, resp);
         if (textError.equals("")) {
-            HttpSession session = req.getSession();
-            System.out.println(session.getId());
-            System.out.println(session.isNew());
             List<Item> filter = new ArrayList<>();
             filter.add(new Item("", "email", "=", loginUser.getEmail()));
             filter.add(new Item("AND", "password", "=", loginUser.getPassword()));
             User currentUser = UserDAO.getUserByFilter(filter).get(0);
             session.setAttribute("currentUser", currentUser);
-            req.getRequestDispatcher("index.jsp").forward(req, resp);
+            resp.sendRedirect("index.jsp");
         } else {
-            req.setAttribute("textError", textError);
-            req.setAttribute("currentUser", null);
-            req.getRequestDispatcher("formloginuser.jsp").forward(req, resp);
+            session.setAttribute("currentUser", null);
+            session.setAttribute("textError", textError);
+            resp.sendRedirect("formloginuser.jsp");
         }
     }
 }

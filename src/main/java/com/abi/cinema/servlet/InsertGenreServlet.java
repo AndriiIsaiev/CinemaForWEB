@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -19,6 +20,7 @@ public class InsertGenreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("insertGenreServlet#doPost");
 
+        HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
         Genre insertGenre = new Genre(req.getParameter("name"));
 
@@ -27,9 +29,9 @@ public class InsertGenreServlet extends HttpServlet {
             GenreDAO.insertGenre(insertGenre);
             UtilsForServlets.listGenre(req, resp);
         } else {
-            req.setAttribute("textError", textError);
-            req.setAttribute("insertGenre", insertGenre);
-            req.getRequestDispatcher("forminsertgenre.jsp").forward(req, resp);
+            session.setAttribute("insertGenre", insertGenre);
+            session.setAttribute("textError", textError);
+            resp.sendRedirect("forminsertgenre.jsp");
         }
     }
 }

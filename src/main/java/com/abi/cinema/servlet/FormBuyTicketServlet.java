@@ -19,7 +19,7 @@ public class FormBuyTicketServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("formBuyTicketServlet#doPost");
+        System.out.println("formBuyTicketServlet#doGet");
 
         HttpSession session = req.getSession();
         System.out.println(session.getId());

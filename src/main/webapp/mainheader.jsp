@@ -4,7 +4,7 @@
         <div style="width: 171px; height: 151px; background-image: url(./img/frame.jpg); background-size: 171px;
                     display: flex; justify-content: center; align-items: center">
             <div style="width: 140px; height: 105px; background-image: url(./img/cinema.jpg); background-size: 140px;
-                        box-shadow: 0 0 10px 10px #f0dbc2 inset"> </div>
+                        box-shadow: 0 0 15px 15px #f0dbc2 inset"> </div>
         </div>
 
         <div align="center" style="width: 171px; height: 151px; background-image: url(./img/frame.jpg); background-size: 171px;

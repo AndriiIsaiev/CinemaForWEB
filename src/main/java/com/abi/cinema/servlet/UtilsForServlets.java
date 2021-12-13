@@ -19,18 +19,41 @@ import java.util.List;
 
 public class UtilsForServlets {
 
+
+    public static String validFilm(Film film, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String textError = "";
+        if (film.getTitle().equals("") | film.getYear().equals("")) {
+            textError = "Не заполнено обязательное поле";
+        } else {
+            if (film.getId() == null) {
+                if (FilmDAO.getFilmByContent(film).size() != 0) {
+                    textError = "Фильм с таким названием уже есть";
+                }
+            } else {
+                List<Item> filter = new ArrayList<>();
+                filter.add(new Item("", "title", "=", film.getTitle()));
+                filter.add(new Item("AND", "id", "!=", film.getId()));
+                if (FilmDAO.getFilmByFilter(filter).size() != 0) {
+                    textError = "Фильм с таким названием уже есть";
+                }
+            }
+        }
+        return textError;
+    }
+
     /**
      *  Utils for films
      */
     public static void listFilm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         List<Film> listFilm = FilmDAO.getAllFilm();
         List<FilmPageItem> listFilePageItem = new ArrayList<>();
         for (Film film : listFilm) {
             List<Genre> listGenre = FilmGenreDAO.getFilmGenreByFilmId(film.getId());
             listFilePageItem.add(new FilmPageItem(film, listGenre));
         }
-        req.setAttribute("listFilePageItem", listFilePageItem);
-        req.getRequestDispatcher("listfilm.jsp").forward(req, resp);
+        session.setAttribute("listFilePageItem", listFilePageItem);
+        resp.sendRedirect("listfilm.jsp");
     }
 
     /**
@@ -59,9 +82,10 @@ public class UtilsForServlets {
     }
 
     public static void listGenre(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         List<Genre> genre = GenreDAO.getAllGenre();
-        req.setAttribute("genre", genre);
-        req.getRequestDispatcher("listgenre.jsp").forward(req, resp);
+        session.setAttribute("genre", genre);
+        resp.sendRedirect("listgenre.jsp");
     }
 
     /**
@@ -113,9 +137,14 @@ public class UtilsForServlets {
     }
 
     public static void listUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         List<User> user = UserDAO.getAllUser();
-        req.setAttribute("user", user);
-        req.getRequestDispatcher("listuser.jsp").forward(req, resp);
+        session.setAttribute("user", user);
+        resp.sendRedirect("listuser.jsp");
+    }
+
+    public static String validSeance(Seance insertSeance, HttpServletRequest req, HttpServletResponse resp) {
+        return "";
     }
 
     public static void listSeance(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -284,7 +313,6 @@ public class UtilsForServlets {
         int freeSeat = SeatDAO.MAX_LINE * SeatDAO.MAX_POSITION - listBaseTicket.size() -listPoolTicket.size();
         session.setAttribute("freeSeat", freeSeat);
     }
-
 
 }
 

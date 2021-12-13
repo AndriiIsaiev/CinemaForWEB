@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
@@ -25,6 +26,7 @@ public class InsertUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("insertUserServlet#doPost");
 
+        HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
         User insertUser = new User(  req.getParameter("email"),
                 new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()),
@@ -40,10 +42,10 @@ public class InsertUserServlet extends HttpServlet {
             UserDAO.insertUser(insertUser);
             UtilsForServlets.listUser(req, resp);
         } else {
-            req.setAttribute("textError", textError);
-            req.setAttribute("password1", req.getParameter("password1"));
-            req.setAttribute("insertUser", insertUser);
-            req.getRequestDispatcher("forminsertuser.jsp").forward(req, resp);
+            session.setAttribute("insertUser", insertUser);
+            session.setAttribute("password1", req.getParameter("password1"));
+            session.setAttribute("textError", textError);
+            resp.sendRedirect("forminsertuser.jsp");
         }
     }
 }

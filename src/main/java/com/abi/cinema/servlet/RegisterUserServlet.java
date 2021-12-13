@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +21,7 @@ public class RegisterUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("registerUserServlet#doPost");
 
+        HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
         User registerUser = new User(  req.getParameter("email"),
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
@@ -34,12 +36,11 @@ public class RegisterUserServlet extends HttpServlet {
         if (textError.equals("")) {
             UserDAO.insertUser(registerUser);
             resp.sendRedirect("index.jsp");
-//            req.getRequestDispatcher("index.jsp").forward(req, resp);
         } else {
-            req.setAttribute("textError", textError);
-            req.setAttribute("password1", req.getParameter("password1"));
-            req.setAttribute("registerUser", registerUser);
-            req.getRequestDispatcher("formregisteruser.jsp").forward(req, resp);
+            session.setAttribute("textError", textError);
+            session.setAttribute("registerUser", registerUser);
+            session.setAttribute("password1", req.getParameter("password1"));
+            resp.sendRedirect("formregisteruser.jsp");
         }
     }
 }

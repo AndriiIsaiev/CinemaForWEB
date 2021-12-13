@@ -225,7 +225,7 @@ public class UniversalDAO {
             }
         } catch (SQLException ex) {
             LOG.error("Cannot delete " + table + "by id " + id + " " + psString);
-            throw new DAOException("Cannot delete " + table + "by id " + id, ex);
+            throw new DAOException("Cannot delete " + table + " by id " + id, ex);
         } finally {
             try {
                 con.commit();

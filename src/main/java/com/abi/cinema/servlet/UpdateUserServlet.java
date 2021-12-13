@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("updateUserServlet#doPost");
 
+        HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
         User updateUser = new User( Integer.parseInt(req.getParameter("id")),
                                     req.getParameter("email"),
@@ -40,10 +42,10 @@ public class UpdateUserServlet extends HttpServlet {
             UserDAO.updateUserByUser(updateUser);
             UtilsForServlets.listUser(req, resp);
         } else {
-            req.setAttribute("textError", textError);
-            req.setAttribute("password1", req.getParameter("password1"));
-            req.setAttribute("editUser", updateUser);
-            req.getRequestDispatcher("formedituser.jsp").forward(req, resp);
+            session.setAttribute("updateUser", updateUser);
+            session.setAttribute("password1", req.getParameter("password1"));
+            session.setAttribute("textError", textError);
+            resp.sendRedirect("formedituser.jsp");
         }
     }
 
