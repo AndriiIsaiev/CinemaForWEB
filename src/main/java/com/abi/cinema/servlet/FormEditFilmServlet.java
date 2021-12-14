@@ -32,7 +32,7 @@ public class FormEditFilmServlet extends HttpServlet {
                 req.getRequestDispatcher("formeditfilm.jsp").forward(req, resp);
             }
         } else {
-            UtilsForServlets.listGenre(req, resp);
+            UtilsForServlets.listFilm(req, resp);
         }
     }
 }

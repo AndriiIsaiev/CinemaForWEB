@@ -23,6 +23,20 @@ public class Seance extends Entity{
         this.baseCost = base_cost;
     }
 
+    public Seance(Integer id, Integer filmId, Timestamp dateTime, Float baseCost) {
+        this.id = id;
+        this.filmId = filmId;
+        this.dateTime = dateTime;
+        this.baseCost = baseCost;
+    }
+
+    public Seance(Integer id, Integer filmId, String dateTime, Float baseCost) {
+        this.id = id;
+        this.filmId = filmId;
+        this.dateTime = Timestamp.valueOf(dateTime);
+        this.baseCost = baseCost;
+    }
+
     public Seance(Seance seance) {
         id = seance.id;
         filmId = seance.filmId;

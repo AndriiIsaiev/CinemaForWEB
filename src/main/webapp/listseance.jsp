@@ -229,6 +229,31 @@
 						border-color: black;
 						border-radius: 2px"
 					>Buy ticket</a>
+
+				</c:if>
+				<c:if test="${currentUser != null && currentUser.role == 1}">
+					<a href="formEditSeance?id=${xseance.getSeanceId()}"
+					   style=" color: black;
+						text-decoration: none;
+						background: darkseagreen ;
+						padding: 3px;
+						margin: 5px;
+						border-width: 1px;
+						border-style: outset;
+						border-color: green;
+						border-radius: 2px"
+					>edit</a>
+					<a href="deleteSeance?id=${xseance.getSeanceId()}"
+					   style=" color: black;
+						text-decoration: none;
+						background: indianred ;
+						padding: 3px;
+						margin: 5px;
+						border-width: 1px;
+						border-style: outset;
+						border-color: firebrick;
+						border-radius: 2px"
+					>delete</a>
 				</c:if>
 			</div>
 		</div>

@@ -14,32 +14,33 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet("/insertSeance")
-public class InsertSeanceServlet extends HttpServlet {
+@WebServlet("/updateSeance")
+public class UpdateSeanceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("insertSeanceServlet#doPost");
+        System.out.println("updateSeanceServlet#doPost");
 
         HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
-        Seance insertSeance;
+        Seance updateSeance;
         try {
-            insertSeance = new Seance( Integer.parseInt(req.getParameter("filmId")),
-                    req.getParameter("seanceDate") + " " + req.getParameter("seanceTime") + ":00",
-                    Float.parseFloat(req.getParameter("seanceCost")));
+            updateSeance = new Seance( Integer.parseInt(req.getParameter("id")),
+                                            Integer.parseInt(req.getParameter("filmId")),
+                                    req.getParameter("seanceDate") + " " + req.getParameter("seanceTime") + ":00",
+                                            Float.parseFloat(req.getParameter("seanceCost")));
         } catch (IllegalArgumentException ex) {
             throw new IOException("Не корректная дата или время", ex);
         }
-        String textError = UtilsForServlets.validSeance(insertSeance, req, resp);
+        String textError = UtilsForServlets.validSeance(updateSeance, req, resp);
         if (textError.equals("")) {
-            SeanceDAO.insertSeance(insertSeance);
+            SeanceDAO.updateSeanceBySeance(updateSeance);
             UtilsForServlets.listSeance(req, resp);
         } else {
-            session.setAttribute("insertSeance", insertSeance);
+            session.setAttribute("updateSeance", updateSeance);
             session.setAttribute("textError", textError);
-            session.setAttribute("currentJSP", "forminsertseance.jsp");
-            resp.sendRedirect("forminsertseance.jsp");
+            session.setAttribute("currentJSP", "formeditseance.jsp");
+            resp.sendRedirect("formeditseance.jsp");
         }
     }
 }

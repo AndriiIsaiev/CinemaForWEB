@@ -1,6 +1,7 @@
 package com.abi.cinema.db.dao;
 
 import com.abi.cinema.db.entity.Entity;
+import com.abi.cinema.db.entity.Film;
 import com.abi.cinema.db.entity.Seance;
 
 import java.io.IOException;
@@ -32,6 +33,18 @@ public class SeanceDAO {
 
     public static List<Seance> getAllSeance() throws IOException {
         return getSeanceByFilter(new ArrayList<>());
+    }
+
+    public static void deleteSeanceById(int id) throws IOException {
+        if (((Integer) id).equals(getSeanceById(id).getId())) {
+            UniversalDAO.deleteEntityById("seance", id);
+        }
+    }
+
+    public static void updateSeanceBySeance(Seance seance) throws IOException {
+        if (seance.getId().equals(getSeanceById(seance.getId()).getId())) {
+            UniversalDAO.updateEntity("seance", seance);
+        }
     }
 
 }

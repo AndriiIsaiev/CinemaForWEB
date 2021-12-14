@@ -8,32 +8,33 @@
 <%@ include file="mainheader.jsp"%>
 
 <div style="width: 1200px; display: flex; justify-content: center">
-<br>
+	<br>
 	<c:choose>
 		<c:when test="${currentUser != null && currentUser.role == 1}">
 			<div style="width: 600px">
-				<form action="insertSeance" method="post">
+				<form action="updateSeance" method="post">
 					<fieldset>
 						<table>
-							<legend>Add new seance</legend>
+							<legend>Edit seance</legend>
 							<span style="color: red"> ${textError} </span> <br>
+							Id           <input name="id" value="${editSeance.id}" readonly><br>
 							<tr><td>Film *</td>  <td>	<select name="filmId" style="padding: 2px 0px">
-															<c:forEach var="xfilm" items="${listFilm}">
-																<option value="${xfilm.getId()}"
-																		<c:if test="${insertSeance.getFilmId() == xfilm.getId()}">
-																			selected
-																		</c:if>
-																>${xfilm.getTitle()}</option>
-															</c:forEach>
-														</select>
+								<c:forEach var="xfilm" items="${listFilm}">
+									<option value="${xfilm.getId()}"
+											<c:if test="${editSeance.getFilmId() == xfilm.getId()}">
+												selected
+											</c:if>
+									>${xfilm.getTitle()}</option>
+								</c:forEach>
+							</select>
 
-													</td></tr>
-							<tr><td>Дата *</td><td><input name="seanceDate" value="${insertSeance.dateTime}" type="date"></td></tr>
-							<tr><td>Время *</td><td><input name="seanceTime" value="${Time.valueOf("09:30:00")}" type="time"></td></tr>
-							<tr><td>Цена *</td> <td><input name="seanceCost" value="${99}" type="number"></td></tr>
+							</td></tr>
+							<tr><td>Дата *</td><td><input name="seanceDate" value="${editSeance.dateTime}" type="date"></td></tr>
+							<tr><td>Время *</td><td><input name="seanceTime" value="${"00:00:00"}" type="time"></td></tr>
+							<tr><td>Цена *</td> <td><input name="seanceCost" value="${editSeance.baseCost}" type="number"></td></tr>
 						</table>
 						* - обязательные поля <br>
-						<input type="submit" value="Add">
+						<input type="submit" value="Update">
 					</fieldset>
 				</form>
 				<form> <button formaction="listSeance" formmethod="get">Back</button> </form>

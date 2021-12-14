@@ -26,6 +26,7 @@
 		</c:when>
 		<c:otherwise>
 			<br><br>
+			<img src="./img/accessdenied.png" width="600" alt="Access denied" style="margin-left: 300px">
 			<p style="font-size: 24px; text-align: center"> Access denied</p>
 		</c:otherwise>
 	</c:choose>
