@@ -7,24 +7,31 @@
 
 <%@ include file="mainheader.jsp"%>
 
-<div>
+<div style="width: 1200px; display: flex; justify-content: center">
 	<br>
 	<c:choose>
 		<c:when test="${currentUser != null && currentUser.role == 1}">
-			Edit film
-			<form action="updateFilm" method="post">
-				Id           <input name="id" value="${editFilm.id}" readonly><br>
-				Film title   <input name="title" value="${editFilm.title}" ><br>
-				Year of issue<input name="year" value="${editFilm.year}" pattern="^19{1}[0-9]{2}|^20{1}[0-9]{2}"><br>
-				Studio       <input name="studio" value="${editFilm.studio}" ><br>
-				Lenght       <input name="length" value="${editFilm.length}" type="time"><br>
-				Age categoory<input name="ageCategory" value="${editFilm.ageCategory}" ><br>
-				<textarea name="description" cols="60" rows="5"> ${editFilm.description} </textarea>
-				<%--		Description  <input name="description" value="${editFilm.description}" size="60"><br>--%>
-				Photoname    <input name="photoURL" type="file" value="${editFilm.photoURL}" ><img src="${editFilm.photoURL}" alt="Постер" /><br>
-				<input type="submit" value="Update">
-			</form>
-			<form> <button formaction="listFilm" formmethod="get">Back</button> </form>
+			<div style="width: 400px">
+				<form action="updateFilm" method="post">
+					<fieldset>
+						<legend>Edit film</legend>
+						<table>
+							<span style="color: red"> ${textError} </span><br>
+							<tr><td>Id</td><td>           <input name="id" value="${editFilm.id}" readonly>></td></tr>
+							<tr><td>Film title *</td><td>   <input name="title" value="${editFilm.title}" >></td></tr>
+							<tr><td>Year of issue *</td><td><input name="year" value="${editFilm.year}" pattern="^19{1}[0-9]{2}|^20{1}[0-9]{2}">></td></tr>
+							<tr><td>Studio</td><td>       <input name="studio" value="${editFilm.studio}" >></td></tr>
+							<tr><td>Lenght *</td><td>       <input name="length" value="${editFilm.length}" type="time">></td></tr>
+							<tr><td>Age categoory</td><td><input name="ageCategory" value="${editFilm.ageCategory}" >></td></tr>
+							<tr><td>Description</td><td><textarea name="description" cols="60" rows="5"> ${editFilm.description} </textarea>></td></tr>
+							<tr><td>Photoname</td><td>    <input name="photoURL" type="file" value="${editFilm.photoURL}" ><img src="${editFilm.photoURL}" alt="Постер" />></td></tr>
+						</table>
+						* - обязательные поля <br>
+						<input type="submit" value="Update">
+					</fieldset>
+				</form>
+				<form> <button formaction="listFilm" formmethod="get">Back</button> </form>
+			</div>
 		</c:when>
 		<c:otherwise>
 			<br><br>

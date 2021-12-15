@@ -23,14 +23,23 @@ public class UpdateFilmServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
-        Film updateFilm = new Film( Integer.parseInt(req.getParameter("id")),
-                                    req.getParameter("title"),
-                                    req.getParameter("year"),
-                                    req.getParameter("studio"),
-                                    req.getParameter("length"),
-                                    Integer.parseInt(req.getParameter("ageCategory")),
-                                    req.getParameter("description"),
-                            "./img/" +  req.getParameter("photoURL"));
+        Film updateFilm = new Film();
+        try {
+            updateFilm = new Film( Integer.parseInt(req.getParameter("id")),
+                                        req.getParameter("title"),
+                                        req.getParameter("year"),
+                                        req.getParameter("studio"),
+                                        req.getParameter("length"),
+                                        Integer.parseInt(req.getParameter("ageCategory")),
+                                        req.getParameter("description"),
+                                "./img/" +  req.getParameter("photoURL"));
+        } catch (IllegalArgumentException ex) {
+            session.setAttribute("updateFilm", updateFilm);
+            session.setAttribute("textError", "Не корректная длительность фильма");
+            session.setAttribute("currentJSP", "formeditfilm.jsp");
+            resp.sendRedirect("formeditfilm.jsp");
+            return;
+        }
         String textError = UtilsForServlets.validFilm(updateFilm, req, resp);
         if (textError.equals("")) {
             FilmDAO.updateFilmByFilm(updateFilm);
@@ -38,6 +47,7 @@ public class UpdateFilmServlet extends HttpServlet {
         } else {
             session.setAttribute("updateFilm", updateFilm);
             session.setAttribute("textError", textError);
+            session.setAttribute("currentJSP", "formeditfilm.jsp");
             resp.sendRedirect("formeditfilm.jsp");
         }
     }

@@ -23,14 +23,18 @@ public class UpdateSeanceServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
-        Seance updateSeance;
+        Seance updateSeance = new Seance();
         try {
             updateSeance = new Seance( Integer.parseInt(req.getParameter("id")),
                                             Integer.parseInt(req.getParameter("filmId")),
                                     req.getParameter("seanceDate") + " " + req.getParameter("seanceTime") + ":00",
                                             Float.parseFloat(req.getParameter("seanceCost")));
         } catch (IllegalArgumentException ex) {
-            throw new IOException("Не корректная дата или время", ex);
+            session.setAttribute("updateSeance", updateSeance);
+            session.setAttribute("textError", "Не корректная дата или время");
+            session.setAttribute("currentJSP", "formeditseance.jsp");
+            resp.sendRedirect("formeditseance.jsp");
+            return;
         }
         String textError = UtilsForServlets.validSeance(updateSeance, req, resp);
         if (textError.equals("")) {

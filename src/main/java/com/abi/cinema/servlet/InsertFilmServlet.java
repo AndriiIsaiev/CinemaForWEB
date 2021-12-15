@@ -23,13 +23,22 @@ public class InsertFilmServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         req.setCharacterEncoding("UTF-8");
-        Film insertFilm = new Film(  req.getParameter("title"),
+        Film insertFilm = new Film();
+        try {
+            insertFilm = new Film(  req.getParameter("title"),
                                         req.getParameter("year"),
                                         req.getParameter("studio"),
                                         req.getParameter("length") + ":00",
                                         Integer.parseInt(req.getParameter("ageCategory")),
                                         req.getParameter("description"),
                                 "./img/" +  req.getParameter("photoURL"));
+        } catch (IllegalArgumentException ex) {
+            session.setAttribute("insertFilm", insertFilm);
+            session.setAttribute("textError", "Не корректная длительность фильма");
+            session.setAttribute("currentJSP", "forminsertfilm.jsp");
+            resp.sendRedirect("forminsertfilm.jsp");
+            return;
+        }
         String textError = UtilsForServlets.validFilm(insertFilm, req, resp);
         if (textError.equals("")) {
             FilmDAO.insertFilm(insertFilm);
@@ -37,6 +46,7 @@ public class InsertFilmServlet extends HttpServlet {
         } else {
             session.setAttribute("insertFilm", insertFilm);
             session.setAttribute("textError", textError);
+            session.setAttribute("currentJSP", "forminsertfilm.jsp");
             resp.sendRedirect("forminsertfilm.jsp");
         }
     }

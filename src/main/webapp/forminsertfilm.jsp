@@ -7,11 +7,11 @@
 
 <%@ include file="mainheader.jsp"%>
 
-<div>
+<div style="width: 1200px; display: flex; justify-content: center">
 	<br>
 	<c:choose>
 		<c:when test="${currentUser != null && currentUser.role == 1}">
-			<div style="width: 300px">
+			<div style="width: 400px">
 				<form action="insertFilm" method="post">
 					<fieldset>
 						<table>
@@ -22,7 +22,8 @@
 							<tr><td>Studio</td>         <td><input name="studio" value="${insertFilm.studio}" ></td></tr>
 							<tr><td>Lenght *</td>       <td><input name="length" value="${insertFilm.length}" type="time"></td></tr>
 							<tr><td>Age categoory</td>  <td><input name="ageCategory" value="${insertFilm.ageCategory}" ></td></tr>
-							<tr><td>Description</td>    <td><input name="description" value="${insertFilm.description}" size="60" ></td></tr>
+							<tr><td>Description</td><td><textarea name="description" cols="60" rows="5"> ${insertFilm.description} </textarea></td></tr>
+<%--							<tr><td>Description</td>    <td><input name="description" value="${insertFilm.description}" size="60" ></td></tr>--%>
 							<tr><td>Photo name</td>     <td><input name="photoURL" value="./img/${insertFilm.photoURL}" type="file" ></td></tr>
 						</table>
 						* - обязательные поля <br>
