@@ -8,6 +8,7 @@ import java.util.*;
 
 public class ReservePool {
     public static Set<Ticket> reservePool = new TreeSet<>();
+    public static long lastCleaningTime = new Date().getTime();
 
     public ReservePool() {
     }
@@ -25,6 +26,23 @@ public class ReservePool {
         }
         return reservePool.remove(ticket);
     }
+
+    public static synchronized void cleanPoll() {
+        long newCleaningTime = new Date().getTime();
+        if (newCleaningTime - lastCleaningTime > 60000) {
+            lastCleaningTime = newCleaningTime;
+            List<Ticket> ticketForDelete = new ArrayList<>();
+            for (Ticket ticket : reservePool) {
+                if (newCleaningTime - ticket.getBuyTime().getTime() > 120000) {
+                    ticketForDelete.add(ticket);
+                }
+            }
+            for (Ticket ticket : ticketForDelete) {
+                removeFromReservePool(ticket);
+            }
+        }
+    }
+
 
     public static boolean isInReservePool(Ticket ticket) {
         return reservePool.contains(ticket);
