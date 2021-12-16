@@ -174,6 +174,11 @@ public class UtilsForServlets {
             seancePage.setGenreIdFilter(Integer.parseInt(newGenreIdFilter));
         }
 
+        String newFilmIdFilter =req.getParameter("newFilmIdFilter");
+        if (newFilmIdFilter != null) {
+            seancePage.setFilmIdFilter(Integer.parseInt(newFilmIdFilter));
+        }
+
         List<Item> seanceFilter = new ArrayList<>();
         User currentUser = (User) session.getAttribute("currentUser");
         if ((currentUser != null && currentUser.getRole() == 0) || currentUser == null) {
@@ -182,13 +187,21 @@ public class UtilsForServlets {
         }
         if (seancePage.getGenreIdFilter() > 0) {
             seanceFilter.add(new Item(seanceFilter.size() == 0 ? "" : "AND",
-                                "film_genre.genreId", "=", "" + seancePage.getGenreIdFilter()));
+                    "film_genre.genreId", "=", "" + seancePage.getGenreIdFilter()));
+        }
+        if (seancePage.getFilmIdFilter() > 0) {
+            seanceFilter.add(new Item(seanceFilter.size() == 0 ? "" : "AND",
+                    "film.Id", "=", "" + seancePage.getFilmIdFilter()));
         }
 
         String joinCondition = "";
         String postCondition = "";
         if (seancePage.getGenreIdFilter() > 0) {
             joinCondition = " INNER JOIN film ON seance.filmId=film.id INNER JOIN film_genre ON film.id=film_genre.filmId ";
+        } else {
+            if (seancePage.getFilmIdFilter() > 0 || seancePage.getPageSort().equals("filmId, dateTime")) {
+                joinCondition = " INNER JOIN film ON seance.filmId=film.id ";
+            }
         }
         List<Seance> seanceFiltered = SeanceDAO.getSeanceBySQL(joinCondition, seanceFilter, postCondition);
         seancePage.setAllSeance(seanceFiltered.size());
@@ -197,25 +210,20 @@ public class UtilsForServlets {
             offset = 0;
         }
         if (seancePage.getPageSort().equals("freeSeat")) {
-            joinCondition = " INNER JOIN ticket ON seance.id=ticket.seanceId ";
-            if (seancePage.getGenreIdFilter() > 0) {
-                joinCondition = joinCondition + " INNER JOIN film ON seance.filmId=film.id INNER JOIN film_genre ON film.id=film_genre.filmId ";
-            }
-            postCondition = " GROUP BY seance.id ORDER BY COUNT(ticket.id) LIMIT " + offset + ", " + seancePage.getPageSize();
+            joinCondition = " INNER JOIN ticket ON seance.id=ticket.seanceId " + joinCondition;
+        }
+
+        if (seancePage.getPageSort().equals("freeSeat")) {
+            postCondition = " GROUP BY seance.id ORDER BY COUNT(ticket.id)";
         } else {
             if (seancePage.getPageSort().equals("filmId, dateTime")) {
-                joinCondition = " INNER JOIN film ON seance.filmId=film.id ";
-                if (seancePage.getGenreIdFilter() > 0) {
-                    joinCondition = joinCondition + " INNER JOIN film_genre ON film.id=film_genre.filmId ";
-                }
-                postCondition = " ORDER BY film.title, seance.dateTime LIMIT " + offset + ", " + seancePage.getPageSize();
+                postCondition = " ORDER BY film.title, seance.dateTime";
             } else {
-                if (seancePage.getGenreIdFilter() > 0) {
-                    joinCondition = " INNER JOIN film ON seance.filmId=film.id INNER JOIN film_genre ON film.id=film_genre.filmId ";
-                }
-                    postCondition = " ORDER BY " + seancePage.getPageSort() + " LIMIT " + offset + ", " + seancePage.getPageSize();
+                postCondition = " ORDER BY " + seancePage.getPageSort();
             }
         }
+        postCondition = postCondition + " LIMIT " + offset + ", " + seancePage.getPageSize();
+
         seanceFiltered = SeanceDAO.getSeanceBySQL(joinCondition, seanceFilter, postCondition);
         seancePage.setPageMax((int)Math.ceil((0.0 + seancePage.getAllSeance()) / seancePage.getPageSize()));
         if (seancePage.getPageMax() < seancePage.getPageNumber()) {
@@ -223,6 +231,8 @@ public class UtilsForServlets {
         }
         seancePage.getListGenre().clear();
         seancePage.setListGenre(GenreDAO.getAllGenre());
+        seancePage.getListFilm().clear();
+        seancePage.setListFilm(FilmDAO.getAllFilm());
         session.setAttribute("seancePage", seancePage);
 
         List<SeancePageItem> seanceList = new ArrayList<>();

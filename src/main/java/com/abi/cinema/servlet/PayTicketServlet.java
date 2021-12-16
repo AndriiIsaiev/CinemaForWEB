@@ -25,17 +25,24 @@ public class PayTicketServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("payTicketServlet#doGet");
 
-        HttpSession session = req.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
-        List<Ticket> payTicket = new ArrayList<>();
-        if (currentUser != null) {
-            payTicket = ReservePool.getTicketByUser(currentUser);
+        synchronized(ReservePool.MONITOR) {
+            HttpSession session = req.getSession();
+            User currentUser = (User) session.getAttribute("currentUser");
+            int sizeAllTicket = (int) session.getAttribute("sizeAllTicket");
+            List<Ticket> payTicket = new ArrayList<>();
+            if (currentUser != null) {
+                payTicket = ReservePool.getTicketByUser(currentUser);
+            }
+
+            String paymentSuccess = "Payment failed, reserved tickets out of time";
+            if (payTicket.size() == sizeAllTicket) {
+                paymentSuccess = "Payment failed";
+                if (UniversalDAO.payTicketTransaction(payTicket)) {
+                    paymentSuccess = "Payment successful";
+                }
+            }
+            req.setAttribute("paymentSuccess", paymentSuccess);
+            req.getRequestDispatcher("paymentsuccess.jsp").forward(req, resp);
         }
-        String paymentSuccess = "Payment failed";
-        if (UniversalDAO.payTicketTransaction(payTicket)) {
-            paymentSuccess = "Payment successful";
-        }
-        req.setAttribute("paymentSuccess", paymentSuccess);
-        req.getRequestDispatcher("paymentsuccess.jsp").forward(req, resp);
     }
 }

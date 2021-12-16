@@ -1,5 +1,6 @@
 package com.abi.cinema.servlet.view;
 
+import com.abi.cinema.db.entity.Film;
 import com.abi.cinema.db.entity.Genre;
 
 import java.util.ArrayList;
@@ -10,9 +11,10 @@ public class SeancePage {
     private int pageMax;
     private int pageSize;
     private String pageSort;
-    private int filmIdFilter;
     private int genreIdFilter;
+    private int filmIdFilter;
     private List<Genre> listGenre;
+    private List<Film> listFilm;
     private int allSeance;
 
 
@@ -24,6 +26,7 @@ public class SeancePage {
         filmIdFilter = -1;
         genreIdFilter = -1;
         listGenre = new ArrayList<>();
+        listFilm = new ArrayList<>();
         allSeance = 0;
     }
 
@@ -59,19 +62,27 @@ public class SeancePage {
         this.pageSort = pageSort;
     }
 
-    public int getFilmIdFilter() { return filmIdFilter; }
-
-    public void setFilmIdFilter(int filmIdFilter) { this.filmIdFilter = filmIdFilter; }
-
     public int getGenreIdFilter() { return genreIdFilter; }
 
     public void setGenreIdFilter(int genreIdFilter) { this.genreIdFilter = genreIdFilter; }
+
+    public int getFilmIdFilter() { return filmIdFilter; }
+
+    public void setFilmIdFilter(int filmIdFilter) { this.filmIdFilter = filmIdFilter; }
 
     public List<Genre> getListGenre() { return listGenre; }
 
     public void setListGenre(List<Genre> listGenre) {
         this.listGenre.add(new Genre(-1, "все жанры"));
         this.listGenre.addAll(listGenre);
+    }
+
+    public List<Film> getListFilm() { return listFilm; }
+
+    public void setListFilm(List<Film> listFilm) {
+        this.listFilm.add(new Film("все фильмы"));
+        this.listFilm.get(0).setId(-1);
+        this.listFilm.addAll(listFilm);
     }
 
     public long getAllSeance() {

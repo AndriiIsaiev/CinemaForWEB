@@ -128,7 +128,7 @@
 			<input type="submit" value="Seance on page"/>
 		</form>
 	</div>
-	<br><br>
+	<br>
 
 	<div style="text-align: center">
 		<span style=" color: black; padding: 3px; margin: 5px">Sort by</span>
@@ -182,6 +182,7 @@
 		<c:if test="${seancePage.getPageSort() == 'freeSeat'}">
 			<b>Free seat</b>
 		</c:if>
+		<br><br>
 
 		<form action="listSeance" style='display:inline; padding-left: 20px'>
 			<input type="submit" value="Filter by"/>
@@ -192,14 +193,23 @@
 						<c:if test="${seancePage.getGenreIdFilter() == fgenre.getId()}">
 							selected
 						</c:if>
-					><img src="./img/comedy.jpg" style="width: 30px;"> ${fgenre.getName()}</option>
+					>${fgenre.getName()}</option>
 			</c:forEach>
+			</select>
+			<select name="newFilmIdFilter" style="padding: 2px 0px">
+				<c:forEach var="ffilm" items="${seancePage.getListFilm()}">
+					<option value="${ffilm.getId()}"
+							<c:if test="${seancePage.getFilmIdFilter() == ffilm.getId()}">
+								selected
+							</c:if>
+					>${ffilm.getTitle()}</option>
+				</c:forEach>
 			</select>
 
 		</form>
 	</div>
 
-	<br><br>
+	<br>
 	<c:forEach var="xseance" items="${seanceList}">
 		<div style="display: flex; justify-content: center; font-size: 16px">
 			<div>

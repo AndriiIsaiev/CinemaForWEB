@@ -41,11 +41,12 @@ public class BascketServlet extends HttpServlet {
             totalTotalCost += buyTicket.get(i).getCost();
         }
 
-        req.setAttribute("sizeAllTicket", sizeAllTicket);
-        req.setAttribute("buyTicket", buyTicket);
-        req.setAttribute("line", line);
-        req.setAttribute("position", position);
-        req.setAttribute("totalTotalCost", totalTotalCost);
+        session.setAttribute("sizeAllTicket", sizeAllTicket);
+        session.setAttribute("buyTicket", buyTicket);
+        session.setAttribute("line", line);
+        session.setAttribute("position", position);
+        session.setAttribute("totalTotalCost", totalTotalCost);
+        session.setAttribute("textError", "");
         req.getRequestDispatcher("formconfirmbuy.jsp").forward(req, resp);
     }
 }
