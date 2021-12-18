@@ -35,7 +35,6 @@ public class InsertFilmServlet extends HttpServlet {
         } catch (IllegalArgumentException ex) {
             session.setAttribute("insertFilm", insertFilm);
             session.setAttribute("textError", "Не корректная длительность фильма");
-            session.setAttribute("currentJSP", "forminsertfilm.jsp");
             resp.sendRedirect("forminsertfilm.jsp");
             return;
         }
@@ -46,7 +45,6 @@ public class InsertFilmServlet extends HttpServlet {
         } else {
             session.setAttribute("insertFilm", insertFilm);
             session.setAttribute("textError", textError);
-            session.setAttribute("currentJSP", "forminsertfilm.jsp");
             resp.sendRedirect("forminsertfilm.jsp");
         }
     }

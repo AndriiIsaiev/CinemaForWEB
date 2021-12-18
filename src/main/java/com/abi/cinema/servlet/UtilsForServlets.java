@@ -250,7 +250,7 @@ public class UtilsForServlets {
                                     seance.getBaseCost(),
                                     seance.getDateTime().after(nowDateTime)));
         }
-        req.setAttribute("seanceList", seanceList);
+        session.setAttribute("seanceList", seanceList);
         req.getRequestDispatcher("listseance.jsp").forward(req, resp);
     }
 

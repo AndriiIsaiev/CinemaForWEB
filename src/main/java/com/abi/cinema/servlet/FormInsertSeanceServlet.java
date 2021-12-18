@@ -35,7 +35,6 @@ public class FormInsertSeanceServlet extends HttpServlet {
             listFilm = FilmDAO.getAllFilm();
             session.setAttribute("listFilm", listFilm);
             session.setAttribute("textError", "");
-            session.setAttribute("currentJSP", "forminsertseance.jsp");
             req.getRequestDispatcher("forminsertseance.jsp").forward(req, resp);
         } else {
             UtilsForServlets.listSeance(req, resp);

@@ -33,7 +33,6 @@ public class FormEditSeanceServlet extends HttpServlet {
                 listFilm = FilmDAO.getAllFilm();
                 session.setAttribute("listFilm", listFilm);
                 session.setAttribute("textError", "");
-                session.setAttribute("currentJSP", "formeditseance.jsp");
                 req.getRequestDispatcher("formeditseance.jsp").forward(req, resp);
             }
         } else {

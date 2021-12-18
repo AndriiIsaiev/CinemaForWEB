@@ -12,11 +12,11 @@ import java.io.IOException;
 public class UserFilter implements Filter {
 
     private static final String DEFAULT_PATH =
-        "/index.jsp /listSeance" +
+        "/index.jsp /changeLocale.jsp /listSeance" +
         "/formLoginUser /loginUser /logoutUser /formloginuser.jsp" +
         "/formRegisterUser /registerUser /formregisteruser.jsp";
     private static final String LOGGED_USER_PATH =
-        "/index.jsp /listSeance /listFilm /listfilm.jsp" +
+        "/index.jsp /changeLocale.jsp /listSeance /listFilm /listfilm.jsp" +
         "/formLoginUser /loginUser /logoutUser /formloginuser.jsp" +
         "/formRegisterUser /registerUser /formregisteruser.jsp" +
         "/reserveSeat /formBuyTicket /bascket /payTicket";

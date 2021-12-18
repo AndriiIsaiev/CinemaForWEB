@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="currentPage" value="listseance.jsp" scope="session"/>
 
 <html>
 <body style="max-width: 1200px">
@@ -131,7 +133,7 @@
 	<br>
 
 	<div style="text-align: center">
-		<span style=" color: black; padding: 3px; margin: 5px">Sort by</span>
+		<span style=" color: black; padding: 3px; margin: 5px"><fmt:message key="listSeance.Sortby"/></span>
 		<c:if test="${seancePage.getPageSort() != 'dateTime'}">
 			<a href="listSeance?seanceSort=dateTime"
 			style=" color: black;

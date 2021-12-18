@@ -31,7 +31,6 @@ public class InsertSeanceServlet extends HttpServlet {
         } catch (IllegalArgumentException ex) {
             session.setAttribute("insertSeance", insertSeance);
             session.setAttribute("textError", "Не корректная дата или время");
-            session.setAttribute("currentJSP", "forminsertseance.jsp");
             resp.sendRedirect("forminsertseance.jsp");
             return;
         }
@@ -42,7 +41,6 @@ public class InsertSeanceServlet extends HttpServlet {
         } else {
             session.setAttribute("insertSeance", insertSeance);
             session.setAttribute("textError", textError);
-            session.setAttribute("currentJSP", "forminsertseance.jsp");
             resp.sendRedirect("forminsertseance.jsp");
         }
     }
