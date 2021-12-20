@@ -30,29 +30,29 @@ public class ConnectionManager {
     }
 
     public static synchronized Connection giveMeConnection() {
-//        for(OneConnection oc : poolConnection) {
-//            if (oc.isConnectionFree()) {
-//                oc.busyConnection();
-//                return oc.getOneConnection();
-//            }
-//        }
-//        return null;
-        return DBUtils.getInstance().getConnection();
+        for(OneConnection oc : poolConnection) {
+            if (oc.isConnectionFree()) {
+                oc.busyConnection();
+                return oc.getOneConnection();
+            }
+        }
+        return null;
+//        return DBUtils.getInstance().getConnection();
     }
 
     public static Connection takeBackConnection(Connection con) {
-//        for(OneConnection oc : poolConnection) {
-//            if (oc.getOneConnection() == con) {
-//                oc.releaseConnection();
-//                return null;
-//            }
-//        }
-//        return con;
-        try {
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for(OneConnection oc : poolConnection) {
+            if (oc.getOneConnection() == con) {
+                oc.releaseConnection();
+                return null;
+            }
         }
-        return null;
+        return con;
+//        try {
+//            con.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
     }
 }

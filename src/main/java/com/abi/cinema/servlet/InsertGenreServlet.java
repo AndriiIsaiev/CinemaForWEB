@@ -25,7 +25,7 @@ public class InsertGenreServlet extends HttpServlet {
         Genre insertGenre = new Genre(req.getParameter("name"));
 
         String textError = UtilsForServlets.validGenre(insertGenre, req, resp);
-        if (textError.equals("")) {
+        if (textError.equals("inall.errorfree")) {
             GenreDAO.insertGenre(insertGenre);
             UtilsForServlets.listGenre(req, resp);
         } else {

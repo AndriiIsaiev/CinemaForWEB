@@ -27,7 +27,7 @@ public class UpdateGenreServlet extends HttpServlet {
                                         req.getParameter("name"));
 
         String textError = UtilsForServlets.validGenre(updateGenre, req, resp);
-        if (textError.equals("")) {
+        if (textError.equals("inall.errorfree")) {
             GenreDAO.updateGenreByGenre(updateGenre);
             UtilsForServlets.listGenre(req, resp);
         } else {

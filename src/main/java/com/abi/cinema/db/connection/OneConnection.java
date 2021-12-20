@@ -17,8 +17,8 @@ public class OneConnection {
 
     public static OneConnection initConnection(String url) throws SQLException {
         OneConnection con = new OneConnection();
-//        con.oneConnection = DriverManager.getConnection(url);
-        con.oneConnection = DBUtils.getInstance().getConnection();
+        con.oneConnection = DriverManager.getConnection(url);
+//        con.oneConnection = DBUtils.getInstance().getConnection();
         con.connectionFree = true;
         return con;
     }

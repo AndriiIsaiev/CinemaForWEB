@@ -16,7 +16,7 @@
 			<form action="updateGenre" method="post">
 				<fieldset>
 					<legend>Edit genre</legend>
-					<span style="color: red"> ${textError} </span><br>
+					<span style="color: red"> <fmt:message key="${textError}" /> </span><br>
 					Id (readonly)<br>
 					<input name="id" value="${editGenre.id}" readonly><br>
 					Name *<br>
