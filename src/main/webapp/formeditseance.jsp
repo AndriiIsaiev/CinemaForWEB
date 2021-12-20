@@ -31,8 +31,8 @@
 							</select>
 
 							</td></tr>
-							<tr><td>Дата *</td><td><input name="seanceDate" value="${editSeance.dateTime}" type="date"></td></tr>
-							<tr><td>Время *</td><td><input name="seanceTime" value="${"00:00:00"}" type="time"></td></tr>
+							<tr><td>Дата *</td><td><input name="seanceDate" value="${"2021-12-29"}" type="date"></td></tr>
+							<tr><td>Время *</td><td><input name="seanceTime" value="${"12:23"}" type="time"></td></tr>
 							<tr><td>Цена *</td> <td><input name="seanceCost" value="${editSeance.baseCost}" type="number"></td></tr>
 						</table>
 						* - обязательные поля <br>

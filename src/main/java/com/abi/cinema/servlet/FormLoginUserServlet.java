@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -20,7 +21,8 @@ public class FormLoginUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("formLoginUserServlet#doGet");
 
-        req.setAttribute("textError", "");
+        HttpSession session = req.getSession();
+        session.setAttribute("textError", "inall.errorfree");
         req.getRequestDispatcher("formloginuser.jsp").forward(req, resp);
     }
 }

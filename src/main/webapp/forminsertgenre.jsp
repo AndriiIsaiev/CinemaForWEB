@@ -17,7 +17,7 @@
 			<form action="insertGenre" method="post">
 				<fieldset>
 					<legend>Add new genre</legend>
-					<span style="color: red"> ${textError} </span><br>
+					<span style="color: red"> <fmt:message key="${textError}" /> </span><br>
 					Name *<br>
 					<input name="name" value="${insertGenre.name}" ><br>
 					* - обязательные поля <br>

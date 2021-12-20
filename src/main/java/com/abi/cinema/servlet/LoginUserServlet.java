@@ -28,7 +28,7 @@ public class LoginUserServlet extends HttpServlet {
                                     req.getParameter("password"));
 
         String textError = UtilsForServlets.validLoginUser(loginUser, req, resp);
-        if (textError.equals("")) {
+        if (textError.equals("inall.errorfree")) {
             List<Item> filter = new ArrayList<>();
             filter.add(new Item("", "email", "=", loginUser.getEmail()));
             filter.add(new Item("AND", "password", "=", loginUser.getPassword()));

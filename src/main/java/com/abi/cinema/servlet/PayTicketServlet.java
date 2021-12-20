@@ -34,11 +34,11 @@ public class PayTicketServlet extends HttpServlet {
                 payTicket = ReservePool.getTicketByUser(currentUser);
             }
 
-            String paymentSuccess = "Payment failed, reserved tickets out of time";
+            String paymentSuccess = "seance.Paymentfailedreservedticketsoutoftime";
             if (payTicket.size() == sizeAllTicket) {
-                paymentSuccess = "Payment failed";
+                paymentSuccess = "seance.Paymentfailed";
                 if (UniversalDAO.payTicketTransaction(payTicket)) {
-                    paymentSuccess = "Payment successful";
+                    paymentSuccess = "seance.Paymentsuccessful";
                 }
             }
             req.setAttribute("paymentSuccess", paymentSuccess);

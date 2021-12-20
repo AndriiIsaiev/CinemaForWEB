@@ -29,7 +29,7 @@ public class FormEditUserServlet extends HttpServlet {
             if (editUser != null) {
                 session.setAttribute("editUser", editUser);
                 session.setAttribute("password1", editUser.getPassword());
-                session.setAttribute("textError", "");
+                session.setAttribute("textError", "inall.errorfree");
                 req.getRequestDispatcher("formedituser.jsp").forward(req, resp);
             }
         } else {

@@ -26,7 +26,7 @@ public class FormEditGenreServlet extends HttpServlet {
             Genre editGenre = GenreDAO.getGenreById(id);
             if (editGenre != null) {
                 session.setAttribute("editGenre", editGenre);
-                session.setAttribute("textError", "");
+                session.setAttribute("textError", "inall.errorfree");
                 req.getRequestDispatcher("formeditgenre.jsp").forward(req, resp);
             }
         } else {

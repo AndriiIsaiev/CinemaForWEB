@@ -10,6 +10,9 @@ public class ReservePool {
     public static Set<Ticket> reservePool = new TreeSet<>();
     public static long lastCleaningTime = new Date().getTime();
     public static final Object MONITOR = new Object();
+    public static final long SLEEP_CYCLE = 60000;
+    public static final long TICKET_RESERVATION_TIME = 120000;
+
 
     public ReservePool() {
     }
@@ -35,11 +38,11 @@ public class ReservePool {
     public static synchronized void cleanPool() {
         synchronized(MONITOR) {
             long newCleaningTime = new Date().getTime();
-            if (newCleaningTime - lastCleaningTime > 60000) {
+            if (newCleaningTime - lastCleaningTime > SLEEP_CYCLE) {
                 lastCleaningTime = newCleaningTime;
                 List<Ticket> ticketForDelete = new ArrayList<>();
                 for (Ticket ticket : reservePool) {
-                    if (newCleaningTime - ticket.getBuyTime().getTime() > 120000) {
+                    if (newCleaningTime - ticket.getBuyTime().getTime() > TICKET_RESERVATION_TIME) {
                         ticketForDelete.add(ticket);
                     }
                 }

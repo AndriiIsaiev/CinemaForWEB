@@ -14,7 +14,7 @@
 	<form action="loginUser" method="post">
 		<fieldset>
 			<legend><fmt:message key="login.Userlogin"/></legend>
-			<span style="color: red"> ${textError} </span><br>
+			<span style="color: red"> <fmt:message key="${textError}" /> </span><br>
 			<fmt:message key="login.EnterE-mail"/><br>
 			<input name="login" value=""><br>
 			<fmt:message key="login.Enterpassword"/><br>

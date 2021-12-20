@@ -13,7 +13,7 @@
 
 	<br>
 	<div style="text-align: center">
-		<span style=" color: black; padding: 3px; margin: 5px">Total ${seancePage.getAllSeance()} seances</span>
+		<span style=" color: black; padding: 3px; margin: 5px"><fmt:message key="seance.Totalseances" /> ${seancePage.getAllSeance()}</span>
 
 		<c:if test="${currentUser != null}">
 			<c:if test="${currentUser.role == 1}">
@@ -27,11 +27,11 @@
 					border-style: outset;
 					border-color: black;
 					border-radius: 2px"
-				>Add new seance</a>
+				><fmt:message key="seance.Addnewseance"/></a>
 			</c:if>
 		</c:if>
 
-		<span style=" color: black; padding: 3px; margin: 5px">Page №</span>
+		<span style=" color: black; padding: 3px; margin: 5px"><fmt:message key="seance.Page" /> №</span>
 		<c:if test="${seancePage.getPageNumber() > 1}">
 			<a href="listSeance?newPage=1"
 			   style=" color: black;
@@ -127,28 +127,28 @@
 					</c:if>
 				>100</option>
 			</select>
-			<input type="submit" value="Seance on page"/>
+			<input type="submit" value="<fmt:message key="seance.Seancesonpage" />"/>
 		</form>
 	</div>
 	<br>
 
 	<div style="text-align: center">
-		<span style=" color: black; padding: 3px; margin: 5px"><fmt:message key="listSeance.Sortby"/></span>
+		<span style=" color: black; padding: 3px; margin: 5px"><fmt:message key="seance.Sortby"/></span>
 		<c:if test="${seancePage.getPageSort() != 'dateTime'}">
 			<a href="listSeance?seanceSort=dateTime"
 			style=" color: black;
-							text-decoration: none;
-							background: rgb(240,240,240);
-						padding: 1px 3px;
-						margin: 2px;
-							border-width: 1px;
-							border-style: outset;
-							border-color: black;
-							border-radius: 2px"
-			>Date time</a>
+					text-decoration: none;
+					background: rgb(240,240,240);
+					padding: 1px 3px;
+					margin: 2px;
+					border-width: 1px;
+					border-style: outset;
+					border-color: black;
+					border-radius: 2px"
+			><fmt:message key="seance.Datetime" /></a>
 		</c:if>
 		<c:if test="${seancePage.getPageSort() == 'dateTime'}">
-			<b>Date time</b>
+			<b><fmt:message key="seance.Datetime" /></b>
 		</c:if>
 
 		<c:if test="${seancePage.getPageSort() != 'filmId, dateTime'}">
@@ -162,10 +162,10 @@
 						border-style: outset;
 						border-color: black;
 						border-radius: 2px"
-			>Film</a>
+			><fmt:message key="seance.Filmtitle" /></a>
 		</c:if>
 		<c:if test="${seancePage.getPageSort() == 'filmId, dateTime'}">
-			<b>Film</b>
+			<b><fmt:message key="seance.Filmtitle" /></b>
 		</c:if>
 
 		<c:if test="${seancePage.getPageSort() != 'freeSeat'}">
@@ -179,15 +179,15 @@
 						border-style: outset;
 						border-color: black;
 						border-radius: 2px"
-			>Free seat</a>
+			><fmt:message key="seance.Freeseat" /></a>
 		</c:if>
 		<c:if test="${seancePage.getPageSort() == 'freeSeat'}">
-			<b>Free seat</b>
+			<b><fmt:message key="seance.Freeseat" /></b>
 		</c:if>
 		<br><br>
 
 		<form action="listSeance" style='display:inline; padding-left: 20px'>
-			<input type="submit" value="Filter by"/>
+			<input type="submit" value="<fmt:message key="seance.Filterby" />"/>
 
 			<select name="newGenreIdFilter" style="padding: 2px 0px">
 				<c:forEach var="fgenre" items="${seancePage.getListGenre()}">
@@ -226,9 +226,9 @@
 					-${xgenre.getName()} <br>
 				</c:forEach>
 				<br>
-				Free seats ${xseance.getFreeSeat()}
+					<fmt:message key="seance.Freeseat" /> ${xseance.getFreeSeat()}
 				<br>
-				Ticket price ${xseance.getCost()}
+					<fmt:message key="seance.Ticketcost" /> ${xseance.getCost()}
 				<c:if test="${(currentUser != null) && (xseance.getAfterNow())}">
 					<a href="formBuyTicket?id=${xseance.getSeanceId()}"
 						style=" color: black;
@@ -240,7 +240,7 @@
 						border-style: outset;
 						border-color: black;
 						border-radius: 2px"
-					>Buy ticket</a>
+					><fmt:message key="seance.Buytickets" /></a>
 
 				</c:if>
 				<c:if test="${currentUser != null && currentUser.role == 1}">
@@ -254,7 +254,7 @@
 						border-style: outset;
 						border-color: green;
 						border-radius: 2px"
-					>edit</a>
+					><fmt:message key="inall.Edit" /></a>
 					<a href="deleteSeance?id=${xseance.getSeanceId()}"
 					   style=" color: black;
 						text-decoration: none;
@@ -265,14 +265,14 @@
 						border-style: outset;
 						border-color: firebrick;
 						border-radius: 2px"
-					>delete</a>
+					><fmt:message key="inall.Delete" /></a>
 				</c:if>
 			</div>
 		</div>
 		<br>
 	</c:forEach>
 	<br>
-	Total ${seancePage.getAllSeance()} films
+	<fmt:message key="seance.Totalseances" /> ${seancePage.getAllSeance()}
 
 </div>
 

@@ -29,7 +29,7 @@ public class UpdateFilmServlet extends HttpServlet {
                                         req.getParameter("title"),
                                         req.getParameter("year"),
                                         req.getParameter("studio"),
-                                        req.getParameter("length"),
+                                        req.getParameter("length")+ ":00",
                                         Integer.parseInt(req.getParameter("ageCategory")),
                                         req.getParameter("description"),
                                 "./img/" +  req.getParameter("photoURL"));

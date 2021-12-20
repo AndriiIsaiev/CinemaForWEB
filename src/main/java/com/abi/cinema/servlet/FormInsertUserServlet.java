@@ -23,7 +23,7 @@ public class FormInsertUserServlet extends HttpServlet {
         User insertUser = new User("", "");
         session.setAttribute("insertUser", insertUser);
         session.setAttribute("password1", insertUser.getPassword());
-        session.setAttribute("textError", "");
+        session.setAttribute("textError", "inall.errorfree");
         req.getRequestDispatcher("forminsertuser.jsp").forward(req, resp);
     }
 }

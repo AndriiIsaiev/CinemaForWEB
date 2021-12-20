@@ -25,7 +25,7 @@ public class FormInsertGenreServlet extends HttpServlet {
         if (id == -1) {
             Genre insertGenre = new Genre("");
             session.setAttribute("insertGenre", insertGenre);
-            session.setAttribute("textError", "");
+            session.setAttribute("textError", "inall.errorfree");
             req.getRequestDispatcher("forminsertgenre.jsp").forward(req, resp);
         } else {
             UtilsForServlets.listGenre(req, resp);

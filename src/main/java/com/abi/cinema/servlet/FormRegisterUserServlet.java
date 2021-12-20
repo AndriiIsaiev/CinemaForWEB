@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -17,10 +18,11 @@ public class FormRegisterUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("formRegisterUserServlet#doGet");
 
+        HttpSession session = req.getSession();
         User registerUser = new User("", "");
-        req.setAttribute("registerUser", registerUser);
-        req.setAttribute("password1", registerUser.getPassword());
-        req.setAttribute("textError", "");
+        session.setAttribute("registerUser", registerUser);
+        session.setAttribute("password1", registerUser.getPassword());
+        session.setAttribute("textError", "inall.errorfree");
         req.getRequestDispatcher("formregisteruser.jsp").forward(req, resp);
     }
 }

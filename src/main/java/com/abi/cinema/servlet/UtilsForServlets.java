@@ -61,9 +61,9 @@ public class UtilsForServlets {
      */
 
     public static String validGenre(Genre genre, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String textError = "";
+        String textError = "inall.errorfree";
         if (genre.getName().equals("")) {
-            textError = "Не заполнено обязательное поле";
+            textError = "inall.Requiredfieldisnotfilled";
         } else {
             if (genre.getId() == null) {
                 if (GenreDAO.getGenreByContent(genre).size() != 0) {
@@ -93,43 +93,43 @@ public class UtilsForServlets {
      */
 
     public static String validUser(User user, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String textError = "";
+        String textError = "inall.errorfree";
         if (user.getEmail().equals("") | user.getPassword().equals("")) {
-            textError = "Не заполнено обязательное поле";
+            textError = "inall.Requiredfieldisnotfilled";
         } else {
             if (user.getId() == null) {
                 if (UserDAO.getUserByContent(user).size() != 0) {
-                    textError = "Пользователь с таким E-mail уже есть";
+                    textError = "user.ThereisalreadyauserwiththisE-mail";
                 }
             } else {
                 List<Item> filter = new ArrayList<>();
                 filter.add(new Item("", "email", "=", user.getEmail()));
                 filter.add(new Item("AND", "id", "!=", user.getId()));
                 if (UserDAO.getUserByFilter(filter).size() != 0) {
-                    textError = "Пользователь с таким E-mail уже есть";
+                    textError = "user.ThereisalreadyauserwiththisE-mail";
                 }
             }
             if (!user.getPassword().equals(req.getParameter("password1"))) {
-                textError = "Пароли не совпадают";
+                textError = "user.Passwordmismatch";
             }
         }
         return textError;
     }
 
     public static String validLoginUser(User user, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String textError = "";
+        String textError = "inall.errorfree";
         if (user.getEmail().equals("") | user.getPassword().equals("")) {
-            textError = "Не заполнено обязательное поле";
+            textError = "inall.Requiredfieldisnotfilled";
         } else {
             List<Item> filter = new ArrayList<>();
             filter.add(new Item("", "email", "=", user.getEmail()));
             filter.add(new Item("AND", "password", "=", user.getPassword()));
             List<User> listUser = UserDAO.getUserByFilter(filter);
             if (listUser.size() == 0) {
-                textError = "Пользователь не найден";
+                textError = "user.Userisnotfound";
             } else {
                 if (listUser.size() > 1) {
-                    textError = "Таких пользователей несколько";
+                    textError = "user.Thereareseveralsuchusers";
                 }
             }
         }

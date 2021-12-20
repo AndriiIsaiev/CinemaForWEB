@@ -22,7 +22,7 @@ public class ContextListener implements ServletContextListener {
             public void run() {
                 while (true) {
                     try {
-                        sleep(60000);
+                        sleep(ReservePool.SLEEP_CYCLE);
                         ReservePool.cleanPool();
                     } catch (InterruptedException e) {
                         e.printStackTrace();

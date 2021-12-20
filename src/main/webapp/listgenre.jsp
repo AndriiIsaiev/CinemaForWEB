@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="mylib" tagdir="/WEB-INF/tags" %>
 
 <c:set var="currentPage" value="listgenre.jsp" scope="session"/>
 
@@ -13,27 +14,25 @@
 	<br>
 	<c:choose>
 		<c:when test="${currentUser != null && currentUser.role == 1}">
-			Total ${genre.size()} genres
-			<a href="formInsertGenre?id=-1"
-			   style=" color: black;
-					text-decoration: none;
-					background: rgb(240,240,240);
-					padding: 3px;
-					margin: 5px;
-					border-width: 1px;
-					border-style: outset;
-					border-color: black;
-					border-radius: 2px"
-			>Add new genre</a>
+			<fmt:message key="genre.Totalgenres" /> ${genre.size()}
+			<mylib:mybutton button_action="genre.Addnewgenre" button_href="formInsertGenre?id=-1" button_color="rgb(240,240,240)"/>
 			<br><br>
+			<table border="1" cellpadding="5">
+				<tr>
+					<th>Id</th><th>Name</th><th>Action</th>
+				</tr>
+
 			<c:forEach var="genre" items="${genre}">
-				${genre.id} ==&gt; ${genre.name}
-				<a href="formEditGenre?id=${genre.id}">edit</a>
-				<a href="deleteGenre?id=${genre.id}">delete</a>
-				<br>
+				<tr>
+					<td>${genre.id}</td><td>${genre.name}</td>
+					<td>
+						<mylib:mybutton button_action="inall.Edit" button_href="formEditGenre?id=${genre.id}" button_color="darkseagreen"/>
+						<mylib:mybutton button_action="inall.Delete" button_href="deleteGenre?id=${genre.id}" button_color="indianred"/>
+					</td>
+				</tr>
 			</c:forEach>
 			<br>
-			Total ${genre.size()} genres
+			<fmt:message key="genre.Totalgenres" /> ${genre.size()}
 		</c:when>
 		<c:otherwise>
 			<br><br>

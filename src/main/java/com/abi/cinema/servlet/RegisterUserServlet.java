@@ -33,7 +33,7 @@ public class RegisterUserServlet extends HttpServlet {
                                         req.getParameter("mailing") == null ? 0 : 1);
 
         String textError = UtilsForServlets.validUser(registerUser, req, resp);
-        if (textError.equals("")) {
+        if (textError.equals("inall.errorfree")) {
             UserDAO.insertUser(registerUser);
             resp.sendRedirect("index.jsp");
         } else {

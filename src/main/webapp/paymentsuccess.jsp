@@ -10,7 +10,7 @@
 <%@ include file="mainheader.jsp"%>
 
 	<br><br><br>
-	${paymentSuccess}
+	<fmt:message key="${paymentSuccess}" />
 
 </body>
 </html>

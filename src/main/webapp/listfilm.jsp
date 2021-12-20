@@ -63,7 +63,7 @@
 					<a href="deleteFilm?id=${xfilm.film.id}"
 							style=" color: black;
 							text-decoration: none;
-							background: indianred ;
+							background: indianred;
 							padding: 3px;
 							margin: 5px;
 							border-width: 1px;

@@ -35,8 +35,7 @@ public class FormBuyTicketServlet extends HttpServlet {
         Film film = FilmDAO.getFilmById(buySeance.getFilmId());
         session.setAttribute("film", film);
 
-        String buyError = "";
-        session.setAttribute("buyError", buyError);
+        session.setAttribute("buyError", "inall.errorfree");
 
         UtilsForServlets.fillSeatInHall(req);
 

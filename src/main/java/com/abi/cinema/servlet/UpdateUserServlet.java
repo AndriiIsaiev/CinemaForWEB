@@ -38,7 +38,7 @@ public class UpdateUserServlet extends HttpServlet {
                                     req.getParameter("mailing") == null ? 0 : 1);
 
         String textError = UtilsForServlets.validUser(updateUser, req, resp);
-        if (textError.equals("")) {
+        if (textError.equals("inall.errorfree")) {
             UserDAO.updateUserByUser(updateUser);
             UtilsForServlets.listUser(req, resp);
         } else {

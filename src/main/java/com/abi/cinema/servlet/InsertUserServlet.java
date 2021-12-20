@@ -38,7 +38,7 @@ public class InsertUserServlet extends HttpServlet {
                                         req.getParameter("mailing") == null ? 0 : 1);
 
         String textError = UtilsForServlets.validUser(insertUser, req, resp);
-        if (textError.equals("")) {
+        if (textError.equals("inall.errorfree")) {
             UserDAO.insertUser(insertUser);
             UtilsForServlets.listUser(req, resp);
         } else {

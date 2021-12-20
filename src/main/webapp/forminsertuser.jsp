@@ -17,22 +17,22 @@
 				<form action="insertUser" method="post">
 					<fieldset>
 						<table>
-							<legend>Add new user</legend>
-							<span style="color: red"> ${textError} </span> <br>
-							<tr><td>E-mail *</td>  <td><input name="email" value="${insertUser.email}" type="email" ></td></tr>
-							<tr><td>Password *</td><td><input name="password" value="${insertUser.password}" type="password"></td></tr>
-							<tr><td>Password *</td><td><input name="password1" value="${password1}" type="password"></td></tr>
-							<tr><td>Role admin?</td><td><input name="role" value="${1}" type="checkbox" <c:if test="${insertUser.role==1}">checked</c:if> ></td></tr>
-							<tr><td>Name</td>       <td><input name="name" value="${insertUser.name}" ></td></tr>
-							<tr><td>Surname</td>    <td><input name="surname" value="${insertUser.surname}" ></td></tr>
-							<tr><td>Phone</td>      <td><input name="phone" value="${insertUser.phone}" pattern="+38([0-9]{3})[0-9]{3}-[0-9]{2}-[0-9]{2}"></td></tr>
-							<tr><td>Mailing</td>    <td><input name="mailing" value="${1}" type="checkbox" <c:if test="${insertUser.mailing==1}">checked</c:if> ></td></tr>
+							<legend><fmt:message key="user.Addnewuser" /></legend>
+							<span style="color: red"> <fmt:message key="${textError}" /> </span><br>
+							<tr><td><fmt:message key="user.E-mail" /> *</td>  <td><input name="email" value="${insertUser.email}" type="email" ></td></tr>
+							<tr><td><fmt:message key="user.Password" /> *</td><td><input name="password" value="${insertUser.password}" type="password"></td></tr>
+							<tr><td><fmt:message key="user.Password" /> *</td><td><input name="password1" value="${password1}" type="password"></td></tr>
+							<tr><td><fmt:message key="user.Roleadmin" /></td><td><input name="role" value="${1}" type="checkbox" <c:if test="${insertUser.role==1}">checked</c:if> ></td></tr>
+							<tr><td><fmt:message key="user.Name" /></td>       <td><input name="name" value="${insertUser.name}" ></td></tr>
+							<tr><td><fmt:message key="user.Surname" /></td>    <td><input name="surname" value="${insertUser.surname}" ></td></tr>
+							<tr><td><fmt:message key="user.Phone" /></td>      <td><input name="phone" value="${insertUser.phone}" pattern="+38([0-9]{3})[0-9]{3}-[0-9]{2}-[0-9]{2}"></td></tr>
+							<tr><td><fmt:message key="user.Mailing" /></td>    <td><input name="mailing" value="${1}" type="checkbox" <c:if test="${insertUser.mailing==1}">checked</c:if> ></td></tr>
 						</table>
-						* - обязательные поля <br>
-						<input type="submit" value="Add">
+						* - <fmt:message key="inall.requiredfields" /> <br>
+						<input type="submit" value="<fmt:message key="inall.Add" />">
 					</fieldset>
 				</form>
-				<form> <button formaction="listUser" formmethod="get">Back</button> </form>
+				<form> <button formaction="listUser" formmethod="get"><fmt:message key="inall.Back" /></button> </form>
 			</div>
 		</c:when>
 		<c:otherwise>

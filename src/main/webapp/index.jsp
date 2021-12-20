@@ -12,10 +12,10 @@
     <c:if test="${currentUser != null && currentUser.role == 0}">
         <div style="margin-top: 30px; ax-width: 1200px; display: flex; justify-content: space-around">
             <div style="width: 200px">
-                <a href="/cin/listSeance"><img src="./img/seance.jpg" style="width: 200px; height: 200px">Сеансы</a> <br>
+                <a href="/cin/listSeance"><img src="./img/seance.jpg" style="width: 200px; height: 200px"><fmt:message key="user.Seances" /></a> <br>
             </div>
             <div style="width: 200px">
-                <a href="/cin/listFilm"><img src="./img/film2.jpg" style="width: 200px; height: 200px">Фильмы</a> <br>
+                <a href="/cin/listFilm"><img src="./img/film2.jpg" style="width: 200px; height: 200px"><fmt:message key="user.Films" /></a> <br>
             </div>
         </div>
     </c:if>
@@ -23,19 +23,19 @@
     <c:if test="${currentUser != null && currentUser.role == 1}">
         <div style="margin-top: 30px; ax-width: 1200px; display: flex; justify-content: space-around; flex-wrap: wrap">
             <div style="width: 200px">
-                <a href="/cin/listSeance"><img src="./img/seance.jpg" style="width: 200px; height: 200px">Редактирование сеансов</a> <br>
+                <a href="/cin/listSeance"><img src="./img/seance.jpg" style="width: 200px; height: 200px"><fmt:message key="seance.Editingseances" /></a> <br>
             </div>
             <div style="width: 200px">
-                <a href="/cin/listFilm"><img src="./img/film2.jpg" style="width: 200px; height: 200px">Реактирование фильмов</a> <br>
+                <a href="/cin/listFilm"><img src="./img/film2.jpg" style="width: 200px; height: 200px"><fmt:message key="film.Editingfilms" /></a> <br>
             </div>
             <div style="width: 200px">
-                <a href="/cin/listUser"><img src="./img/user.jpg" style="width: 200px; height: 200px">Редактирование пользователей</a> <br>
+                <a href="/cin/listUser"><img src="./img/user.jpg" style="width: 200px; height: 200px"><fmt:message key="user.Editingusers" /></a> <br>
             </div>
             <div style="width: 200px">
-                <a href="/cin/listGenre"><img src="./img/genre.jpg" style="width: 200px; height: 200px">Редактирование жанров</a> <br>
+                <a href="/cin/listGenre"><img src="./img/genre.jpg" style="width: 200px; height: 200px"><fmt:message key="genre.Editinggenres" /></a> <br>
             </div>
             <div style="width: 200px">
-                <a href="/cin/adminpage.jsp"><img src="./img/ticket.jpg" style="width: 200px; height: 200px">Просмотр билетов</a> <br>
+                <a href="/cin/adminpage.jsp"><img src="./img/report.jpg" style="width: 200px; height: 200px"><fmt:message key="admin.reports" /></a> <br>
             </div>
         </div>
     </c:if>
